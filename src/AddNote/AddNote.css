@@ -1,0 +1,17 @@
+form{
+    color:white;
+    display:flex;
+    flex-direction: column;
+    }
+
+h2{
+    font-size: 24px;
+}
+
+button{
+    width:60px;
+}
+
+.NotePageNav__back-button{
+    float:left;
+}

@@ -43,3 +43,19 @@
   float: right;
   font-size: 10px;
 }
+
+.Folder__delete {
+  /* --note-button-height: 22px; */
+  background-color: #041a3a;
+  border: 0;
+  color: #bdbcbc;
+  margin-left:380px;
+  /* float: center; */
+  /* font-size: 12px; */
+  /* height: var(--note-button-height); */
+  position: absolute;
+  /* top: calc((var(--note-button-height) + 32px) * -1); */
+  /* transform-origin: right bottom; */
+  transform: rotate(0deg);
+  /* width: calc(var(--note-height)); */
+}

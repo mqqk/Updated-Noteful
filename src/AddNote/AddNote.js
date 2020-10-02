@@ -3,7 +3,8 @@ import './AddNote.css';
 import ApiContext from '../ApiContext';
 import config from '../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import CircleButton from '../CircleButton/CircleButton'
+import CircleButton from '../CircleButton/CircleButton';
+import PropTypes from 'prop-types';
 
 
 export default class AddNote extends Component{
@@ -65,9 +66,9 @@ export default class AddNote extends Component{
         };
         fetch(`${config.API_ENDPOINT}/notes`,option)
         .then(res => {
-            // if(!res.ok){
-            //     throw new Error('Something went wrong');
-            // }
+            if(!res.ok){
+                throw new Error('Something went wrong');
+            }
             return res.json();
         })
         .then(console.log(note))
@@ -84,12 +85,15 @@ export default class AddNote extends Component{
             // console.log(this.context.notes)
 
         })
+        .catch(error => {
+            console.error({error});
+        });
 
     }
 
     render(){
         // console.log(this.state)
-        // console.log(this.props)
+        console.log(this.props)
         // console.log(this.context)
 
         const folderOptions = this.context.folders.map((folder) =>
@@ -112,7 +116,7 @@ export default class AddNote extends Component{
                         id='name'
                         defaultValue=''
                         onChange={e => this.addName(e.target.value)}
-                        required
+                        // required
                         />
                 </label>
                 <label htmlFor="content">
@@ -124,7 +128,7 @@ export default class AddNote extends Component{
                         id="content"
                         defaultValue=''
                         onChange={e => this.addContent(e.target.value)}
-                        required
+                        // required
                         />
                 </label>
                 <label htmlFor="folderSelect">
@@ -133,7 +137,7 @@ export default class AddNote extends Component{
                         id="folder"
                         name="folder"                        
                         onChange={e => this.addFolder(e.target.value)}
-                        required
+                        // required
                     >
                         <option value=''>Select a Folder</option>
                         {folderOptions}
@@ -158,4 +162,16 @@ export default class AddNote extends Component{
         </div>
         )
     }
+}
+
+AddNote.defaultProps = {
+    name:'',
+    content:'',
+    folderId:'',
+}
+
+AddNote.propTypes={
+    name:PropTypes.string.isRequired,
+    content:PropTypes.string.isRequired,
+    folderId:PropTypes.string.isRequired,
 }

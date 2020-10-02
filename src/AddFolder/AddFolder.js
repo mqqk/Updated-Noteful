@@ -3,7 +3,7 @@ import config from '../config';
 import ApiContext from '../ApiContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CircleButton from '../CircleButton/CircleButton'
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 
 
@@ -55,9 +55,9 @@ export default class AddFolder extends Component{
         };
         fetch(`${config.API_ENDPOINT}/folders`,option)
         .then(res => {
-            // if(!res.ok){
-            //     throw new Error('Something went wrong');
-            // }
+            if(!res.ok){
+                throw new Error('Something went wrong');
+            }
             return res.json();
         })
         .then(console.log(folder))
@@ -70,8 +70,10 @@ export default class AddFolder extends Component{
             this.context.addFolder(folder.id,folder.name)
             this.props.history.goBack();
             // console.log(this.context.folders)
-
         })
+        .catch(error => {
+            console.error({error});
+        });
 
     }
 
@@ -79,6 +81,7 @@ export default class AddFolder extends Component{
 
     render(){
         // console.log(this.context)
+        console.log('hi',this.props);
         return(
         <div>
             <form
@@ -109,7 +112,7 @@ export default class AddFolder extends Component{
             <CircleButton
                 tag='button'
                 role='link'
-                // onClick={() => this.props.history.goBack()}
+                onClick={() => this.props.history.goBack()}
                 className='NotePageNav__back-button'
             >
             <FontAwesomeIcon icon='chevron-left' />
@@ -119,4 +122,12 @@ export default class AddFolder extends Component{
         </div>
         )
     }
+}
+
+AddFolder.defaultProps = {
+    name:'',
+}
+
+AddFolder.propTypes={
+    name:PropTypes.string.isRequired,
 }

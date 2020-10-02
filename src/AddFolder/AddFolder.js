@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CircleButton from '../CircleButton/CircleButton'
 // import PropTypes from 'prop-types';
 
+
+
 export default class AddFolder extends Component{
 
     static contextType = ApiContext;
@@ -21,8 +23,8 @@ export default class AddFolder extends Component{
 
     
 
-    addName(name,goBack) {
-        console.log(this.state)
+    addName(name) {
+        // console.log(this.state)
         this.setState({
             id:name,
             name:name,
@@ -40,7 +42,7 @@ export default class AddFolder extends Component{
             id:'',
             name:'',
         })
-        console.log(folder)
+        // console.log(folder)
 
         // this.context.addFolder(folder)
 
@@ -60,13 +62,14 @@ export default class AddFolder extends Component{
         })
         .then(console.log(folder))
         .then(data => {
-            console.log(this.context)
+            // console.log(this.context)
             this.setState({
                 id:'',
                 name:'',
             });
             this.context.addFolder(folder.id,folder.name)
-            console.log(this.context.folders)
+            this.props.history.goBack();
+            // console.log(this.context.folders)
 
         })
 
@@ -75,7 +78,7 @@ export default class AddFolder extends Component{
 
 
     render(){
-        console.log(this.context)
+        // console.log(this.context)
         return(
         <div>
             <form
@@ -85,6 +88,8 @@ export default class AddFolder extends Component{
                 <h2>Add Your Folder Here</h2>
                 <label htmlFor="name">
                     Folder Name Here:
+                    
+                    
                     <input 
                         type="text"
                         className="folderName"
@@ -92,14 +97,19 @@ export default class AddFolder extends Component{
                         id='name'
                         defaultValue=''
                         onChange={e => this.addName(e.target.value)}
+                        required
                         />
                 </label>
-                <button type="submit">Submit</button>
+                <button 
+                    type="submit"
+                    // onClick={() => this.props.history.goBack()}
+                >Submit
+                </button>
             </form>
             <CircleButton
                 tag='button'
                 role='link'
-                onClick={() => this.props.history.goBack()}
+                // onClick={() => this.props.history.goBack()}
                 className='NotePageNav__back-button'
             >
             <FontAwesomeIcon icon='chevron-left' />

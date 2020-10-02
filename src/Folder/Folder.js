@@ -9,9 +9,7 @@ import './Folder.css';
 import PropTypes from 'prop-types';
 
 export default class Folder extends React.Component {
-  // static defaultProps ={
-  //   onDeleteNote: () => {},
-  // }
+ 
   static contextType = ApiContext;
 
   handleClickDelete = () => {
@@ -44,6 +42,7 @@ export default class Folder extends React.Component {
   render() {
     const { name, id } = this.props
     const { notes=[]} = this.context;
+    // console.log(this.context,'rendering note count');
     return (
       <div className='Folder'>
         

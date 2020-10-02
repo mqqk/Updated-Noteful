@@ -15,9 +15,9 @@ export default class AddNote extends Component{
         this.state={
             id:'',
             name:'',
-            modified:'',
+            // modified:'',
             folderId:'',
-            content:''
+            content:'',
         }
     }
 
@@ -37,11 +37,21 @@ export default class AddNote extends Component{
         })
     }
 
+    
+    
+
+    addFolder(folderSelect){        
+        const folderId=this.context.folders.filter(folder => folder.name===folderSelect)
+        this.setState({
+            folderId:folderId[0].id,
+        })
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         console.log(this.state);
-        const {id, name, content} = this.state;
-        const note = {id, name, content};
+        const {id, name, content, folderId} = this.state;
+        const note = {id, name, content, folderId};
         console.log(note)
 
         // this.context.addFolder(folder)
@@ -67,17 +77,26 @@ export default class AddNote extends Component{
                 id:'',
                 name:'',
                 content:'',
+                folderId:'',
             });
-            this.context.addNote(note.id,note.name,note.content)
-            console.log(this.context.notes)
+            this.context.addNote(note.id,note.name,note.content,note.folderId);
+            this.props.history.goBack();
+            // console.log(this.context.notes)
 
         })
 
     }
 
     render(){
-        console.log(this.state)
-        console.log(this.props)
+        // console.log(this.state)
+        // console.log(this.props)
+        // console.log(this.context)
+
+        const folderOptions = this.context.folders.map((folder) =>
+            <option value={folder.name} key={folder.id}>{folder.name}</option>)
+
+            // console.log(folderOptions)
+
         return(
         <div>
             <form
@@ -93,6 +112,7 @@ export default class AddNote extends Component{
                         id='name'
                         defaultValue=''
                         onChange={e => this.addName(e.target.value)}
+                        required
                         />
                 </label>
                 <label htmlFor="content">
@@ -104,9 +124,26 @@ export default class AddNote extends Component{
                         id="content"
                         defaultValue=''
                         onChange={e => this.addContent(e.target.value)}
+                        required
                         />
                 </label>
-                <button type="submit">Submit</button>
+                <label htmlFor="folderSelect">
+                    Folder Select:
+                    <select
+                        id="folder"
+                        name="folder"                        
+                        onChange={e => this.addFolder(e.target.value)}
+                        required
+                    >
+                        <option value=''>Select a Folder</option>
+                        {folderOptions}
+                    </select>
+
+                </label>
+                <button 
+                    type="submit"
+                    // onClick={() => this.props.history.goBack()}
+                    >Submit</button>
             </form>
             <CircleButton
                 tag='button'

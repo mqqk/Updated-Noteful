@@ -16,8 +16,10 @@ export default class NoteListNav extends React.Component {
 
 
 
+
   render() {
-    const { folders=[]} = this.context
+    const { folders=[]} = this.context;
+    // console.log(this.context)
     return (
       <div className='NoteListNav'>
         <ul className='NoteListNav__list'>
@@ -26,19 +28,18 @@ export default class NoteListNav extends React.Component {
             <li key={folder.id}>
               <Folder
                 id={folder.id}
-                name={folder.name}/>
+                name={folder.name}
+              />
             </li>
           )}
         </ul>
         <div className='NoteListNav__button-wrapper'>
-          {/* <FolderError>
-            <AddFolder />
-          </FolderError> */}
           <CircleButton
             tag={Link}
             to='/add-folder'
             type='button'
             className='NoteListNav__add-folder-button'
+            // onClick={show => showForm(show)}
           >
             <FontAwesomeIcon icon='plus' />
             <br />

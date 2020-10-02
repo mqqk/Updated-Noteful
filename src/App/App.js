@@ -16,7 +16,8 @@ import './App.css';
 class App extends Component {
     state = {
         notes: [],
-        folders: []
+        folders: [],
+        showAddForm:false,
     };
 
     componentDidMount() {
@@ -50,16 +51,24 @@ class App extends Component {
     };
 
     handleAddFolder = (id,name) => {
+        console.log('adding folder')
         this.setState({
-            folders:[...this.state.folders,{id,name}]
+            folders:[...this.state.folders,{id,name}],
+            showAddForm:false,
         });   
     };
 
-    handleAddNote = (id,name,content) => {
+    handleAddNote = (id,name,content,folderId) => {
         this.setState({
-            notes:[...this.state.notes,{id,name,content}]
+            notes:[...this.state.notes,{id,name,content,folderId}]
         });
     };
+
+    setShowFolderForm=(show)=>{
+        this.setState({
+          showAddForm:show
+        });
+      }
 
     renderNavRoutes() {
         return (
@@ -108,9 +117,11 @@ class App extends Component {
         const value = {
             notes: this.state.notes,
             folders: this.state.folders,
+            showAddForm:this.state.showAddForm,
             deleteNote: this.handleDeleteNote,
             addFolder: this.handleAddFolder,
             addNote: this.handleAddNote,
+            showForm: this.setShowFolderForm,
         };
         return (
             <ApiContext.Provider value={value}>

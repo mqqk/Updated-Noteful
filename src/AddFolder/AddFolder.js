@@ -18,7 +18,7 @@ export default class AddFolder extends Component{
         this.state={
            
             name:'',
-            showError:'',
+            showError:'Cannot Leave Blank',
 
         }
     }
@@ -39,23 +39,55 @@ export default class AddFolder extends Component{
 
 
     //receives state up date and ensures folder name won't be blank
-    checkInput(name) {
+    validateLength(name) {
        
-        // console.log(name,name.length);
-        if(name.length===0){
-            this.setState({
-                name:'',
-                id:'',
-                showError:"this shouldn't be blank",
-            })
-        }else {
+        // console.log(this.context);
+        if(name.length>0){
             this.setState({
                 name:name,
                 id:name,
-                showError:'',
+                showError:"",
+            })
+        }else {
+            this.setState({
+                name:'',
+                id:'',
+                showError:'Cannot Leave Blank',
             })
         }
-        // {this.handleSubmit()}
+        
+
+        // this.context.folders.map(folder => {
+        //     if(name===folder.name){return( 
+        //         this.setState({
+        //             showError:'This Folder Name Already Exists'
+        //         }))
+        //     }
+        //     else{
+        //         console.log('what now?')
+        //         this.setState({
+        //             name:'',
+        //             id:'',
+        //         })}
+        // })
+            
+            
+       
+    }
+
+    validateName(e){
+        e.preventDefault();
+        // console.log(this.state.name);
+        const nameCheck = this.context.folders.filter(folder => folder.name===this.state.name);
+        // console.log(nameCheck);
+            if(nameCheck.length===0){return this.handleSubmit(e)};
+            if(nameCheck[0].name===this.state.name){return (
+            this.setState({
+                name:'',
+                id:'',
+                showError:'Folder Name Already Exists'
+            })
+        )}
     }
 
     handleSubmit(e) {
@@ -67,6 +99,7 @@ export default class AddFolder extends Component{
             id:'',
             name:'',
         })
+
         // console.log(folder)
 
         // this.context.addFolder(folder)
@@ -106,12 +139,12 @@ export default class AddFolder extends Component{
 
     render(){
         // console.log(this.context)
-        // console.log(this.state);
+        console.log(this.state);
         return(
         <div>
             <form
                 className="addFolder"
-                onSubmit={e => this.handleSubmit(e)}
+                onSubmit={e => this.validateName(e)}
                 >
                 <h2>Add Your Folder Here</h2>
                 <label htmlFor="name">
@@ -124,8 +157,8 @@ export default class AddFolder extends Component{
                         name="name"
                         id='name'
                         defaultValue=''
-                        onClick={e => this.checkInput(e.target.value)}
-                        onChange={e => this.checkInput(e.target.value)}
+                        onClick={e => this.validateLength(e.target.value)}
+                        onChange={e => this.validateLength(e.target.value)}
                         required
                         />
                         <p className="error">{this.state.showError}</p>

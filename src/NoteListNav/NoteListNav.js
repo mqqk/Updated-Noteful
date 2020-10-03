@@ -5,7 +5,7 @@ import CircleButton from '../CircleButton/CircleButton';
 import Folder from '../Folder/Folder';
 import ApiContext from '../ApiContext';
 import './NoteListNav.css';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 
 export default class NoteListNav extends React.Component {
@@ -19,7 +19,7 @@ export default class NoteListNav extends React.Component {
 
   render() {
     const { folders=[]} = this.context;
-    // console.log(this.context)
+    // console.log(this.props)
     return (
       <div className='NoteListNav'>
         <ul className='NoteListNav__list'>
@@ -53,13 +53,5 @@ export default class NoteListNav extends React.Component {
 }
 
 
-NoteListNav.propTypes = {
 
-  onDeleteNote:PropTypes.func,
 
-};
-
-NoteListNav.defaultProps = {
-
-  onDeleteNote: () => {},
-}

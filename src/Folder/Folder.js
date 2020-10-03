@@ -14,9 +14,9 @@ export default class Folder extends React.Component {
 
   handleClickDelete = () => {
     // e.preventDefault()
-    console.log(this.props)
+    
     const folderId = this.props.id
-    console.log(folderId);
+    // console.log(folderId);
 
     fetch(`${config.API_ENDPOINT}/folders/${folderId}`, {
       method: 'DELETE',
@@ -43,6 +43,7 @@ export default class Folder extends React.Component {
     const { name, id } = this.props
     const { notes=[]} = this.context;
     // console.log(this.context,'rendering note count');
+    // console.log('hi',this.props);
     return (
       <div className='Folder'>
         
@@ -63,6 +64,8 @@ export default class Folder extends React.Component {
 
 Folder.propTypes = {
   onDeleteNote:PropTypes.func,
+  id:PropTypes.string,
+  name:PropTypes.string,
 }
 
 Folder.defaultProps={

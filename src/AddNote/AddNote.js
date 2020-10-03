@@ -126,8 +126,8 @@ export default class AddNote extends Component{
     }
 
     render(){
-        console.log(this.state)
-        console.log(this.props)
+        // console.log(this.state)
+        // console.log(this.props)
         // console.log(this.context)
 
         const folderOptions = this.context.folders.map((folder) =>

@@ -42,6 +42,7 @@ export default class AddFolder extends Component{
     validateLength(name) {
        
         // console.log(this.context);
+        name=name.trim();
         if(name.length>0){
             this.setState({
                 name:name,
@@ -56,30 +57,17 @@ export default class AddFolder extends Component{
             }))
         }
         
-
-        // this.context.folders.map(folder => {
-        //     if(name===folder.name){return( 
-        //         this.setState({
-        //             showError:'This Folder Name Already Exists'
-        //         }))
-        //     }
-        //     else{
-        //         console.log('what now?')
-        //         this.setState({
-        //             name:'',
-        //             id:'',
-        //         })}
-        // })
-            
             
        
     }
 
     validateName(e){
         e.preventDefault();
-        // console.log(this.state.name);
+
+        
         const nameCheck = this.context.folders.filter(folder => folder.name===this.state.name);
         // console.log(nameCheck);
+        // this.state.name=this.state.name.trim();
             if(this.state.name.length===0){return(
                 this.setState({
                     name:'',
@@ -99,7 +87,7 @@ export default class AddFolder extends Component{
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log('running fetch');
+        // console.log('running fetch');
         const {id, name} = this.state;
         const folder = {id, name};
         this.setState({
@@ -125,7 +113,7 @@ export default class AddFolder extends Component{
             }
             return res.json();
         })
-        .then(console.log(folder))
+        // .then(console.log(folder))
         .then(data => {
             // console.log(this.context)
             this.setState({
@@ -146,7 +134,9 @@ export default class AddFolder extends Component{
 
     render(){
         // console.log(this.context)
-        console.log(this.state);
+
+        
+        // console.log(this.state.name.length);
         return(
         <div>
             <form

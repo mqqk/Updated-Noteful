@@ -29,6 +29,8 @@ export default class AddNote extends Component{
 
     addName(name) {
         // console.log(name)
+        name=name.trim();
+        // console.log(name.length)
         if(name.length>0){
             this.setState({
                 id:name,
@@ -67,7 +69,7 @@ export default class AddNote extends Component{
 
     addFolder(folderSelect){        
         const folderId=this.context.folders.filter(folder => folder.name===folderSelect)
-        console.log(folderSelect);
+        // console.log(folderSelect);
         if(folderSelect!=="Select"){
 
             this.setState({
@@ -85,8 +87,9 @@ export default class AddNote extends Component{
 
     validateName(e){
         e.preventDefault();
-        // console.log(this.state.name);
-        // const nameCheck = this.context.folders.filter(folder => folder.name===this.state.name);
+        
+       
+        const nameCheck = this.context.notes.filter(note => note.name===this.state.name);
         // console.log(nameCheck);
             if(this.state.name.length===0){return(
                 this.setState({
@@ -107,24 +110,26 @@ export default class AddNote extends Component{
                 })
             )}
 
-            return this.handleSubmit(e);
-        //     if(nameCheck.length===0){return this.handleSubmit(e)};
-        //     if(nameCheck[0].name===this.state.name){return (
-        //     this.setState({
-        //         name:'',
-        //         id:'',
-        //         showError:'Folder Name Already Exists'
-        //     })
-        // )}
+            
+            // console.log('made it to name check')
+            if(nameCheck.length===0){return this.handleSubmit(e)};
+            if(nameCheck[0].name===this.state.name){return (
+            this.setState({
+                name:'',
+                id:'',
+                showNameError:'Note Name Already Exists'
+            })
+            )}
+            
     }
 
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
         const {id, name, content, folderId} = this.state;
         const note = {id, name, content, folderId};
-        console.log(note)
+        // console.log(note)
 
         // this.context.addFolder(folder)
 
@@ -142,9 +147,9 @@ export default class AddNote extends Component{
             }
             return res.json();
         })
-        .then(console.log(note))
+        // .then(console.log(note))
         .then(data => {
-            console.log(this.context)
+            // console.log(this.context)
             this.setState({
                 id:'',
                 name:'',
@@ -163,9 +168,10 @@ export default class AddNote extends Component{
     }
 
     render(){
-        console.log(this.state)
+        // console.log(this.state)
         // console.log(this.props)
         // console.log(this.context)
+        // console.log(this.state.name.length);
 
         const folderOptions = this.context.folders.map((folder) =>
             <option value={folder.name} key={folder.id}>{folder.name}</option>)

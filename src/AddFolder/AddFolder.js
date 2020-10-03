@@ -48,12 +48,12 @@ export default class AddFolder extends Component{
                 id:name,
                 showError:"",
             })
-        }else {
+        }else {return(
             this.setState({
                 name:'',
                 id:'',
                 showError:'Cannot Leave Blank',
-            })
+            }))
         }
         
 
@@ -80,6 +80,13 @@ export default class AddFolder extends Component{
         // console.log(this.state.name);
         const nameCheck = this.context.folders.filter(folder => folder.name===this.state.name);
         // console.log(nameCheck);
+            if(this.state.name.length===0){return(
+                this.setState({
+                    name:'',
+                    id:'',
+                    showError:'Remember, this cannot be blank'
+                })
+            )}
             if(nameCheck.length===0){return this.handleSubmit(e)};
             if(nameCheck[0].name===this.state.name){return (
             this.setState({

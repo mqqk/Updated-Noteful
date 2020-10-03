@@ -82,6 +82,43 @@ export default class AddNote extends Component{
         }
     }
 
+
+    validateName(e){
+        e.preventDefault();
+        // console.log(this.state.name);
+        // const nameCheck = this.context.folders.filter(folder => folder.name===this.state.name);
+        // console.log(nameCheck);
+            if(this.state.name.length===0){return(
+                this.setState({
+                    name:'',
+                    id:'',
+                    showNameError:'Remember, this cannot be blank'
+                })
+            )}
+            if(this.state.content.length===0){return(
+                this.setState({
+                    content:'',
+                    showContentError:'Remember, this cannot be blank',
+                })
+            )}
+            if(this.state.folderId===''){return(
+                this.setState({
+                    showFolderError:'Remember to make a selection',
+                })
+            )}
+
+            return this.handleSubmit(e);
+        //     if(nameCheck.length===0){return this.handleSubmit(e)};
+        //     if(nameCheck[0].name===this.state.name){return (
+        //     this.setState({
+        //         name:'',
+        //         id:'',
+        //         showError:'Folder Name Already Exists'
+        //     })
+        // )}
+    }
+
+
     handleSubmit(e) {
         e.preventDefault();
         console.log(this.state);
@@ -126,7 +163,7 @@ export default class AddNote extends Component{
     }
 
     render(){
-        // console.log(this.state)
+        console.log(this.state)
         // console.log(this.props)
         // console.log(this.context)
 
@@ -139,7 +176,7 @@ export default class AddNote extends Component{
         <div>
             <form
                 className="addNote"
-                onSubmit={e => this.handleSubmit(e)}>
+                onSubmit={e => this.validateName(e)}>
                 <h2>Add Your Note Here</h2>
                 <label htmlFor="name">
                     Note Name:
@@ -151,7 +188,7 @@ export default class AddNote extends Component{
                         defaultValue=''
                         // onClick={e => this.addName(e.target.value)}
                         onChange={e => this.addName(e.target.value)}
-                        required
+                        // required
                         />
                         <p className='error'>{this.state.showNameError}</p>
                 </label>
@@ -165,7 +202,7 @@ export default class AddNote extends Component{
                         defaultValue=''
                         // onClick={e => this.addContent(e.target.value)}
                         onChange={e => this.addContent(e.target.value)}
-                        required
+                        // required
                         />
                         <p className='error'>{this.state.showContentError}</p>
                 </label>

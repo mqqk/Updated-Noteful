@@ -19,41 +19,46 @@ export default class AddNote extends Component{
             // modified:'',
             folderId:'',
             content:'',
-            showError:'',
+            showFolderError:'Must Choose a Folder',
+            showNameError:'Cannot be blank',
+            showContentError:'Cannot be blank',
         }
     }
 
+    
+
     addName(name) {
         // console.log(name)
-        if(name.length===0){
+        if(name.length>0){
+            this.setState({
+                id:name,
+                name:name,
+                showNameError:'',
+                
+            })}
+            else{
             this.setState({
                 name:'',
                 id:'',
-                showError:'Cannot be left blank!'
-            })
-        }else{
-        this.setState({
-            id:name,
-            name:name,
-            showError:'',
-            
-        })}
+                showNameError:'Cannot be blank!',
+            }   
+        )}
     }
 
     addContent(content) {
         // console.log(content)
-        if(content.length===0){
+        if(content.length>0){
             this.setState({
-                name:'',
-                id:'',
-                showError:'Cannot be left blank!'
-            })
-        }else{
-        this.setState({
-            content:content,
-            showError:'',
-            
-        })}
+                content:content,
+                showContentError:'',
+                
+            })}
+            else{
+            this.setState({
+                content:'',
+                showContentError:'Cannot be blank!',
+            }   
+        )}
         
     }
 
@@ -62,9 +67,19 @@ export default class AddNote extends Component{
 
     addFolder(folderSelect){        
         const folderId=this.context.folders.filter(folder => folder.name===folderSelect)
-        this.setState({
-            folderId:folderId[0].id,
-        })
+        console.log(folderSelect);
+        if(folderSelect!=="Select"){
+
+            this.setState({
+                folderId:folderId[0].id,
+                showFolderError:''
+            })
+        }else{
+            this.setState({
+                folderId:'',
+                showFolderError:'Must Select a Folder',
+            })
+        }
     }
 
     handleSubmit(e) {
@@ -111,7 +126,7 @@ export default class AddNote extends Component{
     }
 
     render(){
-        // console.log(this.state)
+        console.log(this.state)
         console.log(this.props)
         // console.log(this.context)
 
@@ -134,11 +149,11 @@ export default class AddNote extends Component{
                         name="name"
                         id='name'
                         defaultValue=''
-                        onClick={e => this.addName(e.target.value)}
+                        // onClick={e => this.addName(e.target.value)}
                         onChange={e => this.addName(e.target.value)}
                         required
                         />
-                        <p className='error'>{this.state.showError}</p>
+                        <p className='error'>{this.state.showNameError}</p>
                 </label>
                 <label htmlFor="content">
                     Contents:
@@ -148,23 +163,24 @@ export default class AddNote extends Component{
                         name="content"
                         id="content"
                         defaultValue=''
-                        // onClick={e => this.addName(e.target.value)}
+                        // onClick={e => this.addContent(e.target.value)}
                         onChange={e => this.addContent(e.target.value)}
                         required
                         />
-                        {/* <p className='error'>{this.state.showError}</p> */}
+                        <p className='error'>{this.state.showContentError}</p>
                 </label>
                 <label htmlFor="folderSelect">
                     Folder Select:
                     <select
                         id="folder"
-                        name="folder"                        
+                        name="folder"
+                        // defaultValue="Important"                        
                         onChange={e => this.addFolder(e.target.value)}
-                        required
                     >
-                        <option value=''>Select a Folder</option>
+                        <option defaultValue='Important'>Select</option>                        
                         {folderOptions}
                     </select>
+                    <p className='error'>{this.state.showFolderError}</p>
 
                 </label>
                 <button 

@@ -15,3 +15,15 @@ button{
 .NotePageNav__back-button{
     float:left;
 }
+
+.error{
+    color:red;
+    font-size:12px;
+    margin-left:11em;
+    margin-top:-.10em;
+}
+
+input{
+    width:10em;
+    margin-left:.5em;
+}

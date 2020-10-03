@@ -1,4 +1,6 @@
 .error{
     color:red;
-    /* font-size:50px; */
+    font-size:12px;
+    margin-left:11em;
+    margin-top:-.10em;
 }

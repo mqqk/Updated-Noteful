@@ -41,7 +41,7 @@ export default class AddFolder extends Component{
     //receives state up date and ensures folder name won't be blank
     checkInput(name) {
        
-        console.log(name,name.length);
+        // console.log(name,name.length);
         if(name.length===0){
             this.setState({
                 name:'',
@@ -106,7 +106,7 @@ export default class AddFolder extends Component{
 
     render(){
         // console.log(this.context)
-        console.log(this.state);
+        // console.log(this.state);
         return(
         <div>
             <form

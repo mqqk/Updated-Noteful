@@ -19,23 +19,42 @@ export default class AddNote extends Component{
             // modified:'',
             folderId:'',
             content:'',
+            showError:'',
         }
     }
 
     addName(name) {
         // console.log(name)
+        if(name.length===0){
+            this.setState({
+                name:'',
+                id:'',
+                showError:'Cannot be left blank!'
+            })
+        }else{
         this.setState({
             id:name,
             name:name,
+            showError:'',
             
-        })
+        })}
     }
 
     addContent(content) {
         // console.log(content)
+        if(content.length===0){
+            this.setState({
+                name:'',
+                id:'',
+                showError:'Cannot be left blank!'
+            })
+        }else{
         this.setState({
             content:content,
-        })
+            showError:'',
+            
+        })}
+        
     }
 
     
@@ -115,9 +134,11 @@ export default class AddNote extends Component{
                         name="name"
                         id='name'
                         defaultValue=''
+                        onClick={e => this.addName(e.target.value)}
                         onChange={e => this.addName(e.target.value)}
                         required
                         />
+                        <p className='error'>{this.state.showError}</p>
                 </label>
                 <label htmlFor="content">
                     Contents:
@@ -127,9 +148,11 @@ export default class AddNote extends Component{
                         name="content"
                         id="content"
                         defaultValue=''
+                        // onClick={e => this.addName(e.target.value)}
                         onChange={e => this.addContent(e.target.value)}
                         required
                         />
+                        {/* <p className='error'>{this.state.showError}</p> */}
                 </label>
                 <label htmlFor="folderSelect">
                     Folder Select:

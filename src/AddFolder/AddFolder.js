@@ -4,8 +4,9 @@ import ApiContext from '../ApiContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CircleButton from '../CircleButton/CircleButton'
 import PropTypes from 'prop-types';
+import './AddFolder.css'
 
-
+// const userError = <p>Need Input</p>;
 
 export default class AddFolder extends Component{
 
@@ -17,25 +18,49 @@ export default class AddFolder extends Component{
         this.state={
            
             name:'',
+            showError:'',
 
         }
     }
 
     
 
-    addName(name) {
-        // console.log(this.state)
-        this.setState({
-            id:name,
-            name:name,
+    // addName(name) {
+    //     // console.log(name,name.length)
+        
+    //     this.setState({
+    //         id:name,
+    //         name:name,
+    //         showError:'',
             
-        })
+    //     })
 
+    // }
+
+
+    //receives state up date and ensures folder name won't be blank
+    checkInput(name) {
+       
+        console.log(name,name.length);
+        if(name.length===0){
+            this.setState({
+                name:'',
+                id:'',
+                showError:"this shouldn't be blank",
+            })
+        }else {
+            this.setState({
+                name:name,
+                id:name,
+                showError:'',
+            })
+        }
+        // {this.handleSubmit()}
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state);
+        console.log('running fetch');
         const {id, name} = this.state;
         const folder = {id, name};
         this.setState({
@@ -81,7 +106,7 @@ export default class AddFolder extends Component{
 
     render(){
         // console.log(this.context)
-        console.log(this.props);
+        console.log(this.state);
         return(
         <div>
             <form
@@ -99,9 +124,11 @@ export default class AddFolder extends Component{
                         name="name"
                         id='name'
                         defaultValue=''
-                        onChange={e => this.addName(e.target.value)}
+                        onClick={e => this.checkInput(e.target.value)}
+                        onChange={e => this.checkInput(e.target.value)}
                         required
                         />
+                        <p className="error">{this.state.showError}</p>
                 </label>
                 <button 
                     type="submit"

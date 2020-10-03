@@ -17,3 +17,6 @@ export default function NavCircleButton(props) {
 NavCircleButton.defaultProps ={
   tag: 'a',
 }
+
+
+//making sure that something is created when the element renders

@@ -116,7 +116,7 @@ export default class AddNote extends Component{
                         id='name'
                         defaultValue=''
                         onChange={e => this.addName(e.target.value)}
-                        // required
+                        required
                         />
                 </label>
                 <label htmlFor="content">
@@ -128,7 +128,7 @@ export default class AddNote extends Component{
                         id="content"
                         defaultValue=''
                         onChange={e => this.addContent(e.target.value)}
-                        // required
+                        required
                         />
                 </label>
                 <label htmlFor="folderSelect">
@@ -137,7 +137,7 @@ export default class AddNote extends Component{
                         id="folder"
                         name="folder"                        
                         onChange={e => this.addFolder(e.target.value)}
-                        // required
+                        required
                     >
                         <option value=''>Select a Folder</option>
                         {folderOptions}
@@ -164,14 +164,9 @@ export default class AddNote extends Component{
     }
 }
 
-AddNote.defaultProps = {
-    name:'',
-    content:'',
-    folderId:'',
-}
+
 
 AddNote.propTypes={
-    name:PropTypes.string.isRequired,
-    content:PropTypes.string.isRequired,
-    folderId:PropTypes.string.isRequired,
+    history:PropTypes.object,
+
 }

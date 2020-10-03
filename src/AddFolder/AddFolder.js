@@ -81,7 +81,7 @@ export default class AddFolder extends Component{
 
     render(){
         // console.log(this.context)
-        console.log('hi',this.props);
+        console.log(this.props);
         return(
         <div>
             <form
@@ -124,10 +124,7 @@ export default class AddFolder extends Component{
     }
 }
 
-AddFolder.defaultProps = {
-    name:'',
-}
 
 AddFolder.propTypes={
-    name:PropTypes.string.isRequired,
+    history:PropTypes.object,
 }

@@ -51,7 +51,7 @@ class App extends Component {
     };
 
     handleAddFolder = (id,name) => {
-        console.log('adding folder')
+        // console.log('adding folder')
         this.setState({
             folders:[...this.state.folders,{id,name}],
             showAddForm:false,
@@ -113,7 +113,7 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state);
+        // console.log(this.state);
         const value = {
             notes: this.state.notes,
             folders: this.state.folders,

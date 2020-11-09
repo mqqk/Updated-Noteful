@@ -43,7 +43,7 @@ export default class Folder extends React.Component {
     const { name, id } = this.props
     const { notes=[]} = this.context;
     // console.log(this.context,'rendering note count');
-    // console.log('hi',this.props);
+    console.log('hi',this.props);
     return (
       <div className='Folder'>
         

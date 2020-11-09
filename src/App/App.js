@@ -23,8 +23,8 @@ class App extends Component {
     componentDidMount() {
         // console.log(`${config.API_ENDPOINT}/notes`)
         Promise.all([
-            fetch(`${config.API_ENDPOINT}/notes`),
-            fetch(`${config.API_ENDPOINT}/folders`)
+            fetch(`${config.API_ENDPOINT}/api/notes`),
+            fetch(`${config.API_ENDPOINT}/api/folders`)
         ])
             .then(([notesRes, foldersRes]) => {
                 if (!notesRes.ok)
@@ -58,9 +58,9 @@ class App extends Component {
         });   
     };
 
-    handleAddNote = (id,name,content,folderId) => {
+    handleAddNote = (id,name,content,folder_id) => {
         this.setState({
-            notes:[...this.state.notes,{id,name,content,folderId}]
+            notes:[...this.state.notes,{id,name,content,folder_id}]
         });
     };
 

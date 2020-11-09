@@ -18,7 +18,7 @@ export default class Note extends React.Component {
     const noteId = this.props.id
     console.log(this.props)
 
-    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'

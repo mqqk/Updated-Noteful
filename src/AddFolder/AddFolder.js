@@ -16,7 +16,7 @@ export default class AddFolder extends Component{
     constructor(props){
         super(props);
         this.state={
-           
+            id:'',
             name:'',
             showError:'Cannot Leave Blank',
 
@@ -46,7 +46,7 @@ export default class AddFolder extends Component{
         if(name.length>0){
             this.setState({
                 name:name,
-                id:name,
+                id:'',
                 showError:"",
             })
         }else {return(
@@ -88,8 +88,8 @@ export default class AddFolder extends Component{
     handleSubmit(e) {
         e.preventDefault();
         // console.log('running fetch');
-        const {id, name} = this.state;
-        const folder = {id, name};
+        const {name} = this.state;
+        const folder = {name};
         this.setState({
             id:'',
             name:'',
@@ -106,7 +106,7 @@ export default class AddFolder extends Component{
                 'content-type': 'application/json',
             }
         };
-        fetch(`${config.API_ENDPOINT}/folders`,option)
+        fetch(`${config.API_ENDPOINT}/api/folders`,option)
         .then(res => {
             if(!res.ok){
                 throw new Error('Something went wrong');
@@ -137,6 +137,7 @@ export default class AddFolder extends Component{
 
         
         // console.log(this.state.name.length);
+        console.log('note props',this.props);
         return(
         <div>
             <form

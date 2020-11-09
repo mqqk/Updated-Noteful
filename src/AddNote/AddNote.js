@@ -7,6 +7,7 @@ import CircleButton from '../CircleButton/CircleButton';
 import PropTypes from 'prop-types';
 
 
+
 export default class AddNote extends Component{
 
     static contextType = ApiContext;
@@ -16,8 +17,8 @@ export default class AddNote extends Component{
         this.state={
             id:'',
             name:'',
-            // modified:'',
-            folderId:'',
+            modified:'',
+            folder_id:'',
             content:'',
             showFolderError:'Must Choose a Folder',
             showNameError:'Cannot be blank',
@@ -68,17 +69,17 @@ export default class AddNote extends Component{
     
 
     addFolder(folderSelect){        
-        const folderId=this.context.folders.filter(folder => folder.name===folderSelect)
+        const folder_id=this.context.folders.filter(folder => folder.name===folderSelect)
         // console.log(folderSelect);
         if(folderSelect!=="Select"){
 
             this.setState({
-                folderId:folderId[0].id,
+                folder_id:folder_id[0].id,
                 showFolderError:''
             })
         }else{
             this.setState({
-                folderId:'',
+                folder_id:'',
                 showFolderError:'Must Select a Folder',
             })
         }
@@ -104,7 +105,7 @@ export default class AddNote extends Component{
                     showContentError:'Remember, this cannot be blank',
                 })
             )}
-            if(this.state.folderId===''){return(
+            if(this.state.folder_id===''){return(
                 this.setState({
                     showFolderError:'Remember to make a selection',
                 })
@@ -127,8 +128,8 @@ export default class AddNote extends Component{
     handleSubmit(e) {
         e.preventDefault();
         // console.log(this.state);
-        const {id, name, content, folderId} = this.state;
-        const note = {id, name, content, folderId};
+        const {name, content, folder_id} = this.state;
+        const note = {name, content, folder_id};
         // console.log(note)
 
         // this.context.addFolder(folder)
@@ -140,7 +141,7 @@ export default class AddNote extends Component{
                 'content-type': 'application/json',
             }
         };
-        fetch(`${config.API_ENDPOINT}/notes`,option)
+        fetch(`${config.API_ENDPOINT}/api/notes`,option)
         .then(res => {
             if(!res.ok){
                 throw new Error('Something went wrong');
@@ -154,9 +155,10 @@ export default class AddNote extends Component{
                 id:'',
                 name:'',
                 content:'',
-                folderId:'',
+                folder_id:'',
+                modified:'',
             });
-            this.context.addNote(note.id,note.name,note.content,note.folderId);
+            this.context.addNote(note.id,note.name,note.content,note.folder_id,note.modified);
             this.props.history.goBack();
             // console.log(this.context.notes)
 

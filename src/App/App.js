@@ -58,9 +58,9 @@ class App extends Component {
         });   
     };
 
-    handleAddNote = (id,name,content,folder_id) => {
+    handleAddNote = (id,name,content,folder_id,modified) => {
         this.setState({
-            notes:[...this.state.notes,{id,name,content,folder_id}]
+            notes:[...this.state.notes,{id,name,content,folder_id,modified}]
         });
     };
 

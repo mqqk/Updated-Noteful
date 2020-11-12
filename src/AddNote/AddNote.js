@@ -17,7 +17,7 @@ export default class AddNote extends Component{
         this.state={
             id:'',
             name:'',
-            modified:'',
+            modified:Date.now(),
             folder_id:'',
             content:'',
             showFolderError:'Must Choose a Folder',

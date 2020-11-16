@@ -16,7 +16,7 @@ export default class AddFolder extends Component{
     constructor(props){
         super(props);
         this.state={
-            id:'',
+            
             name:'',
             showError:'Cannot Leave Blank',
 
@@ -46,13 +46,13 @@ export default class AddFolder extends Component{
         if(name.length>0){
             this.setState({
                 name:name,
-                id:'',
+                
                 showError:"",
             })
         }else {return(
             this.setState({
                 name:'',
-                id:'',
+                
                 showError:'Cannot Leave Blank',
             }))
         }
@@ -71,7 +71,7 @@ export default class AddFolder extends Component{
             if(this.state.name.length===0){return(
                 this.setState({
                     name:'',
-                    id:'',
+                    
                     showError:'Remember, this cannot be blank'
                 })
             )}
@@ -79,7 +79,7 @@ export default class AddFolder extends Component{
             if(nameCheck[0].name===this.state.name){return (
             this.setState({
                 name:'',
-                id:'',
+                
                 showError:'Folder Name Already Exists'
             })
         )}
@@ -91,7 +91,7 @@ export default class AddFolder extends Component{
         const {name} = this.state;
         const folder = {name};
         this.setState({
-            id:'',
+            
             name:'',
         })
 
@@ -117,10 +117,10 @@ export default class AddFolder extends Component{
         .then(data => {
             // console.log(this.context)
             this.setState({
-                id:'',
+                
                 name:'',
             });
-            this.context.addFolder(folder.id,folder.name)
+            this.context.addFolder(folder.name)
             this.props.history.goBack();
             // console.log(this.context.folders)
         })

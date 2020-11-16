@@ -18,7 +18,7 @@ export default class Folder extends React.Component {
     const folderId = this.props.id
     // console.log(folderId);
 
-    fetch(`${config.API_ENDPOINT}/folders/${folderId}`, {
+    fetch(`${config.API_ENDPOINT}/api/folders/${folderId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -40,10 +40,13 @@ export default class Folder extends React.Component {
   }
 
   render() {
+    
     const { name, id } = this.props
     const { notes=[]} = this.context;
-    // console.log(this.context,'rendering note count');
-    console.log('hi',this.props);
+    // const { folders = [] } = this.context;
+    const folder = parseInt(id)
+    // console.log(notes,folders, id);
+    // console.log('hi',this.props, notes);
     return (
       <div className='Folder'>
         
@@ -53,7 +56,7 @@ export default class Folder extends React.Component {
                 to={`/folder/${id}`}
               >
                 <span className='NoteListNav__num-notes'>
-                  {countNotesForFolder(notes, id)}
+                  {countNotesForFolder(notes, folder)}
                 </span>
                 {name}
               </NavLink>

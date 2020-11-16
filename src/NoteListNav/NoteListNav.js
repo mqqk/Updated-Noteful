@@ -19,7 +19,9 @@ export default class NoteListNav extends React.Component {
 
   render() {
     const { folders=[]} = this.context;
-    // console.log(this.props)
+    const folderId=(this.props.match.params.folderId)
+    // console.log(folderId)
+    // console.log(folders.map(folder => folder.id))
     return (
       <div className='NoteListNav'>
         <ul className='NoteListNav__list'>
@@ -29,6 +31,7 @@ export default class NoteListNav extends React.Component {
               <Folder
                 id={`${folder.id}`}
                 name={folder.name}
+                folder_id={folderId}
               />
             </li>
           )}

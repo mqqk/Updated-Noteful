@@ -50,10 +50,10 @@ class App extends Component {
         });
     };
 
-    handleAddFolder = (id,name) => {
+    handleAddFolder = (name) => {
         // console.log('adding folder')
         this.setState({
-            folders:[...this.state.folders,{id,name}],
+            folders:[...this.state.folders,{name}],
             showAddForm:false,
         });   
     };

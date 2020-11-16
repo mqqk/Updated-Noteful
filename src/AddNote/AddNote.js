@@ -17,7 +17,7 @@ export default class AddNote extends Component{
         this.state={
             id:'',
             name:'',
-            modified:Date.now(),
+            modified:'',
             folder_id:'',
             content:'',
             showFolderError:'Must Choose a Folder',
@@ -26,6 +26,13 @@ export default class AddNote extends Component{
         }
     }
 
+    modifyDate(e){
+        e.preventDefault();
+        const date = toString(Date.now());
+        this.setState({
+            modified:date,
+        })
+    }
     
 
     addName(name) {
@@ -34,7 +41,7 @@ export default class AddNote extends Component{
         // console.log(name.length)
         if(name.length>0){
             this.setState({
-                id:name,
+                id:'',
                 name:name,
                 showNameError:'',
                 
@@ -127,9 +134,9 @@ export default class AddNote extends Component{
 
     handleSubmit(e) {
         e.preventDefault();
-        // console.log(this.state);
-        const {name, content, folder_id} = this.state;
-        const note = {name, content, folder_id};
+        console.log(this.state);
+        const {name, id, modified, content, folder_id} = this.state;
+        const note = {id, name, modified, content, folder_id};
         // console.log(note)
 
         // this.context.addFolder(folder)
